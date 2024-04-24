@@ -2,6 +2,14 @@
 import AppLayout from './components/AppLayout.vue'
 import { onMounted, computed } from 'vue'
 import { useDisplay } from 'vuetify'
+import { Route } from '@/types'
+
+const routes: Route[] = [
+  { title: "Dashboard", route: "/" },
+  { title: "ToDo", route: "/todos" },
+  { title: "Weather", route: "/weather" },
+  { title: "Profile", route: "/profile" },
+];
 
 const { name } = useDisplay()
 
@@ -17,15 +25,9 @@ const width = computed(() => {
 
 <template>
   <v-layout class="rounded rounded-md">
-    <app-layout></app-layout>
+    <app-layout :routes="routes"></app-layout>
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
-      <v-card
-        :width="width"
-        class="bg-card"
-        subtitle="This is a card subtitle"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus!"
-        title="This is a title"
-      ></v-card>
+      <router-view></router-view>
     </v-main>
   </v-layout>
 </template>

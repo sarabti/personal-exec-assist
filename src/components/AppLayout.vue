@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onUpdated, onMounted } from 'vue'
 import { useDisplay } from 'vuetify'
+import { Route } from '@/types'
 
 const { smAndDown } = useDisplay()
 
@@ -16,27 +17,11 @@ const calcDrawer = () => {
   return
 }
 
+defineProps({
+  routes: Array as Route[],
+})
 onMounted(calcDrawer)
 onUpdated(calcDrawer)
-
-const items = [
-  {
-    title: 'Foo',
-    value: 'foo',
-  },
-  {
-    title: 'Bar',
-    value: 'bar',
-  },
-  {
-    title: 'Fizz',
-    value: 'fizz',
-  },
-  {
-    title: 'Buzz',
-    value: 'buzz',
-  },
-];
 </script>
 
 <template>
@@ -60,8 +45,20 @@ const items = [
     v-model="drawer"
     :location="smAndDown ? 'top' : 'left'"
     :permanent="!smAndDown"
+    width=200
+    class="h-auto"
   >
-    <v-list :items="items"></v-list>
+    <v-list nav>
+        <v-list-item
+            v-for="route in routes"
+            :key="route.title"
+            @click="selectedTitle = route.title"
+            router
+            :to="route.route"
+        >
+          {{ route.title }}
+        </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
