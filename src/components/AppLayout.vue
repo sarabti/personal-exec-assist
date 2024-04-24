@@ -49,15 +49,14 @@ onUpdated(calcDrawer)
     class="h-auto"
   >
     <v-list nav>
-        <v-list-item
-            v-for="route in routes"
-            :key="route.title"
-            @click="selectedTitle = route.title"
-            router
-            :to="route.route"
-        >
-          {{ route.title }}
-        </v-list-item>
+      <v-list-item
+          v-for="route in routes"
+          :key="route.title"
+          router
+          :to="route.route"
+      >
+        {{ route.title }}
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
