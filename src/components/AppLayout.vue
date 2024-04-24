@@ -6,22 +6,24 @@ import { Route } from '@/types'
 const { smAndDown } = useDisplay()
 
 const drawer = ref(false)
+const appName = "Executive Assistant"
+const selectedRoute = ref(appName)
 
-const toggleDrawer = () => {
-  drawer.value = !drawer.value;
-}
-
-const calcDrawer = () => {
+const calcDrawer = (() => {
   if (!smAndDown.value)
     drawer.value = true
-  return
-}
+})
 
 defineProps({
   routes: Array as Route[],
 })
 onMounted(calcDrawer)
 onUpdated(calcDrawer)
+
+const setSelected = (item) => {
+  selectedRoute.value = item
+  console.log(selectedRoute.value)
+}
 
 </script>
 
@@ -37,10 +39,11 @@ onUpdated(calcDrawer)
   <v-app-bar elevation="3">
     <v-app-bar-nav-icon
       v-if="smAndDown"
-      @click.stop="toggleDrawer"
-      :elevation="drawer ? 10: undefined"
+      @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
-    <v-app-bar-title :class="{'title-center':!smAndDown}">Executive Assistant</v-app-bar-title>
+    <v-app-bar-title :class="{'title-center':!smAndDown}">
+      {{ smAndDown ? selectedRoute : appName }}
+    </v-app-bar-title>
   </v-app-bar>
   <v-navigation-drawer
     v-model="drawer"
@@ -55,6 +58,7 @@ onUpdated(calcDrawer)
           :key="route.title"
           router
           :to="route.route"
+          @click="setSelected(route.title)"
       >
         {{ route.title }}
       </v-list-item>
