@@ -15,7 +15,7 @@ export const themes: Record<string, ThemeDefinition> = {
     dark: true,
     colors: {
       primary: staticPrimaryDarkenColor,
-      card: 'cc8899',
+      card: '572649',
     },
   },
 }

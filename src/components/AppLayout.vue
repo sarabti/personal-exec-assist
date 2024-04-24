@@ -22,7 +22,6 @@ onUpdated(calcDrawer)
 
 const setSelected = (item) => {
   selectedRoute.value = item
-  console.log(selectedRoute.value)
 }
 
 </script>

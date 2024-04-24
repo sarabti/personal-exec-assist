@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useTheme } from 'vuetify'
+import { Route } from '@/types'
 import AppLayout from './components/AppLayout.vue'
 import NamePopUp from './components/NamePopUp.vue'
-import { ref, onMounted, onUpdated } from 'vue'
-import { Route } from '@/types'
 
 const routes: Route[] = [
   { title: "Dashboard", route: "/" },
@@ -12,24 +13,27 @@ const routes: Route[] = [
 ];
 
 const renderApp = ref(true)
+const theme = useTheme()
 
-const calcRenderApp = () => {
+const calcStorageProps = () => {
+  if(!localStorage.getItem('locale'))
+    localStorage.setItem('locale', 'english')
+
+  if(!localStorage.getItem('theme'))
+    localStorage.setItem('theme', 'light')
+
   if(localStorage.getItem('username'))
     renderApp.value = true
   else
     renderApp.value = false
-}
 
-onMounted(calcRenderApp)
-onUpdated(calcRenderApp)
-
-const updateApp = () =>  {
-  console.log("hehehehehehehe")
+  theme.global.name.value = localStorage.getItem('theme')
 }
 
 window.onstorage = () => {
-  calcRenderApp()
+  calcStorageProps()
 }
+onMounted(calcStorageProps)
 </script>
 
 <template>
@@ -37,7 +41,7 @@ window.onstorage = () => {
     <app-layout :routes="routes"></app-layout>
     <name-pop-up
       :ask-name="!renderApp"
-      @name-set="calcRenderApp"
+      @name-set="calcStorageProps"
     ></name-pop-up>
     <v-main
       class="d-flex align-center justify-center"
