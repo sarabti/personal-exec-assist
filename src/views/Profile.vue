@@ -60,7 +60,7 @@ onMounted(() => {
       ></v-select>
 
       <v-btn
-        class="me-4"
+        class="me-4 bg-btn"
         type="submit"
       >
         Reset Settings

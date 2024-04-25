@@ -9,6 +9,7 @@ export const themes: Record<string, ThemeDefinition> = {
     colors: {
       primary: staticPrimaryColor,
       card: 'd8bfd8',
+      btn: 'a0e0e4',
     }
   },
   dark: {
@@ -16,6 +17,7 @@ export const themes: Record<string, ThemeDefinition> = {
     colors: {
       primary: staticPrimaryDarkenColor,
       card: '572649',
+      btn: '003B73',
     },
   },
 }

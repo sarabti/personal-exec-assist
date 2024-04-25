@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useTheme } from 'vuetify'
-import { Route } from '@/types'
+import { Route } from '@/utils/typests'
 import AppLayout from './components/AppLayout.vue'
 import NamePopUp from './components/NamePopUp.vue'
 

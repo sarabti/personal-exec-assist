@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onUpdated, onMounted } from 'vue'
 import { useDisplay } from 'vuetify'
-import { Route } from '@/types'
+import { Route } from '@/utils/types.ts'
 
 const { smAndDown } = useDisplay()
 

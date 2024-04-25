@@ -1,24 +1,39 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useDisplay } from 'vuetify'
+import { ref } from 'vue'
+import AppCard from '@/components/AppCard.vue'
+import weatherCodes from '@/utils/WeatherCodes.ts'
+import cities from '@/utils/Cities.ts'
 
-const { name } = useDisplay()
+const city = ref('')
+const temperature = ref(0)
+const desciption = ref('')
 
-const width = computed(() => {
-  switch (name.value) {
-    case 'xs': return 220
-    case 'sm': return 400
-    case 'mdAndUp': return 500
-  }
-  return undefined
-})
+const getWeather = () => {
+  console.log(city.value)
+}
+
 </script>
 <template>
-  <v-card
-    :width="width"
-    class="bg-card"
-    subtitle="This is a card subtitle"
-    text="Lorem 4!"
-    title="This is a title"
-  ></v-card>
+  <app-card>
+    <v-card-title>Enter a city name:</v-card-title>
+    <v-container class="w-75">
+      <v-autocomplete
+        v-model="city"
+        :items="cities"
+        item-title="name"
+        item-value="id"
+        label="City"
+      >
+      </v-autocomplete>
+    </v-container>
+    <v-btn class="mb-6 bg-btn" @click="getWeather">
+      get weather
+    </v-btn>
+    <div class="text-h3 mb-4">
+      {{ temperature }} &deg;C
+    </div>
+    <div class="text-h6">
+      {{ desciption }}
+    </div>
+  </app-card>
 </template>
