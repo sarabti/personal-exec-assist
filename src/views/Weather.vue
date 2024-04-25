@@ -49,3 +49,8 @@ const getWeather = async () => {
     </div>
   </app-card>
 </template>
+<style scoped>
+.v-btn--disabled {
+  background-color: var(--v-theme-on-surface-variant) !important;
+}
+</style>
